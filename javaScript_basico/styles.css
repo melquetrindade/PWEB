@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+button#botaoCarregar{
+    background-color: blue;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+div#nome_cerveja{
+    margin-top: 10px;
+    background-color: blue;
+    color: chocolate;
+    font-family: Arial, Helvetica, sans-serif;
+    width: fit-content;
+    border-radius: 10px;
+    transition-duration: 20s;
+}
+
+.hide{
+    display: none;
+    transition-duration: 20s;
+}
+
+div#nome_cerveja > h1{
+    padding: 5px;
+}

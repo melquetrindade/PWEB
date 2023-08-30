@@ -17,6 +17,12 @@ div.bloco{
     padding: 5px;
 }
 
+div#container_meuAmor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .button_bloco{
     padding: 10px;
     color: white;

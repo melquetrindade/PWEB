@@ -1,6 +1,13 @@
 @charset "UTF-8";
 
+div#conatiner_meuAmor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 div.cerveja{
+    margin-bottom: 7px;
     background-color: black;
     color: aqua;
     padding: 5px;
@@ -8,7 +15,6 @@ div.cerveja{
     font-size: 14px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
-    margin-bottom: 7px;
     width: fit-content;
 }
 
@@ -34,8 +40,10 @@ div#container-main{
 }
 
 div#container-conteudo{
+    margin-top: 100px;
+    text-align: center;
     padding: 10px;
-    background-color: darkgray;
+    background-color: rgb(176, 242, 255);
     box-shadow: 2px 2px 2px black;
     border-radius: 10px;
 }

@@ -27,10 +27,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/menu/novaPagina": [
+    "/contact": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/menu/novaPagina.js"
+      "static/chunks/pages/contact.js"
+    ],
+    "/projects": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/projects.js"
     ]
   },
   "ampFirstPages": []

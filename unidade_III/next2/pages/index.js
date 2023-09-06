@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from '../styles/index.module.css'
 
 export default function Home(){
     return (
@@ -6,15 +7,18 @@ export default function Home(){
             <h1>
                 Página Principal
             </h1>
+            <ShowImg/>
         </>
     )
 }
 
 function ShowImg(){
     return (
-        <figure>
-            <img src='https://img2.gratispng.com/20171202/1b1/audi-png-picture-5a228075ee1b68.9154536215122105499753.jpg' alt='carro'></img>
-            <figcaption>Sneaker</figcaption>
+        <figure className={styles.card}>
+            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTecqNONs6tIKslt1wfjFCGiR2k3n0i3DqpiPnktHlns58fxzdgVxykfRWzq0hM8ivtp0o&usqp=CAU' alt='carro'/>
+            <figcaption>
+                <p>Óculos</p>
+            </figcaption>
         </figure>
     )
 }

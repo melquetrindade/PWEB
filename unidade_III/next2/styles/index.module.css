@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+/*
+.card{
+    width: 300px;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    display: grid;
+    grid-template-areas: "stack";
+}
+
+.card > * {
+    grid-area: stack;
+}
+
+.card > figcaption{
+    display: grid;
+    align-items: end;
+    padding: 1.5rem 2rem;
+    color: black;
+    background-image: linear-gradient(to bottom,
+        rgba(33, 44, 55, 0)
+        rgba(33, 44, 55, 0)
+        rgba(33, 44, 55, 0.75)
+    );
+}
+
+.card > figcaption{
+    opacity: 0;
+    transition: opacity 300ms;
+}
+
+.card:hover figcaption{
+    opacity: 1;
+}*/
+
+.card{
+    display: grid;
+    position: relative;
+    grid-template: "stack";
+    width: 200px;
+    height: 200px;
+}
+
+.card > * {
+    grid-area: stack;
+}
+
+.card > img{
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+    transition: opacity 200ms;
+}
+
+.card:hover > img{
+    opacity: 0.5;
+}
+
+.card > figcaption {
+    opacity: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    transition: opacity 200ms;
+}
+
+.card:hover > figcaption{
+    opacity: 1;
+}
+
+.card p{
+    margin: auto;
+    text-align: center;
+    color: black;
+}

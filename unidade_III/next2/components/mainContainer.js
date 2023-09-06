@@ -1,11 +1,12 @@
 import Footer from './footer'
 import Navbar from './navBar'
+import styles from '../styles/mainContainer.module.css'
 
 export default function MainContainer({children}){
     return (
         <>
             <Navbar/>
-            <div>{children}</div>
+            <div className={styles.mainContainer}>{children}</div>
             <Footer/>
         </>
     )

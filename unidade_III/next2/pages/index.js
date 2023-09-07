@@ -14,11 +14,13 @@ export default function Home(){
 
 function ShowImg(){
     return (
-        <figure className={styles.card}>
-            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTecqNONs6tIKslt1wfjFCGiR2k3n0i3DqpiPnktHlns58fxzdgVxykfRWzq0hM8ivtp0o&usqp=CAU' alt='carro'/>
-            <figcaption>
-                <p>Óculos</p>
-            </figcaption>
-        </figure>
+        <div className={styles.card}>
+            <div className={styles.poster}>
+                <img src='https://i.pinimg.com/564x/d2/84/d2/d284d2fb3dd25062a9d6c0076cf30855.jpg' alt='carro'/>
+            </div>
+            <div className={styles.details}>
+                <img src='/images/logo_spider2.png' className={styles.logo}></img>
+            </div>
+        </div>
     )
 }

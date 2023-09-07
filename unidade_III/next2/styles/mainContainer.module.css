@@ -3,5 +3,6 @@
 .mainContainer{
     min-height: 80vh;
     padding: 20px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
 }

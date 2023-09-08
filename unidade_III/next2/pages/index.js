@@ -29,7 +29,7 @@ function ShowImg(){
                     <img src='https://i.pinimg.com/564x/d2/84/d2/d284d2fb3dd25062a9d6c0076cf30855.jpg' alt='carro'/>
                 </div>
                 <div className={styles.details}>
-                    <NameMovie name="Spider-Ma"/>
+                    <NameMovie name="Spider-Man"/>
                 </div>
             </div>
             <div className={styles.card}>

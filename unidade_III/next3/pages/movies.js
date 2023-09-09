@@ -21,7 +21,7 @@ export default function Movies({data}){
             setIsVisible2(!divChave);
         }
         setIsVisible1(!divFilme);
-    };
+    }
 
     const [divChave, setIsVisible2] = useState(false);
 
@@ -30,30 +30,42 @@ export default function Movies({data}){
             setIsVisible1(!divFilme);
         }
         setIsVisible2(!divChave);
-    };
+    }
 
-    /*
-    inputNome.addEventListener("keypress", (e) => {
-        const onlyNumbers = /[a-zA-Z]/
-        const key = String.fromCharCode(e.keyCode)
+    const [movieId, setMovie] = useState('')
+
+    const handleChange = (e) => {
+        const inputText = e.target.value
     
-        if(!onlyNumbers.test(key)){
-            e.preventDefault()
-            return
+        // Use uma expressão regular para validar se o texto contém apenas letras.
+        if (/^[a-zA-Z ]+$/.test(inputText) || inputText === '') {
+          setMovie(inputText)
         }
-    })
+    }
 
-    inputAno.addEventListener("keypress", (e) => {
-        const onlyNumbers = /[0-9]/
-        const key = String.fromCharCode(e.keyCode)
-    
-        if(!onlyNumbers.test(key)){
-            e.preventDefault()
-            return
+    const [anoId, setAno] = useState('')
+
+    const handleChangeYear = (e) => {
+        const inputText = e.target.value
+
+        if (/^[0-9]+$/.test(inputText) || inputText === '') {
+            setAno(inputText)
         }
-    })*/
+    }
 
-    const [movieId, setNome] = useState('');
+    const [chaveId, setChave] = useState('')
+
+    const handleChangeChave = (e) => {
+        const inputText = e.target.value
+
+        if (/^[a-zA-Z ]+$/.test(inputText) || inputText === '') {
+            setChave(inputText)
+        }
+    }
+
+    const funcTest = () => {
+        console.log(movieId)
+    }
 
     return (
         <>
@@ -73,31 +85,44 @@ export default function Movies({data}){
                             id='movieId' 
                             class="form-control shadow-none" 
                             placeholder='Nome do Filme' 
-                            required>
-                            onChange={(e) => {
-                                const onlyNumbers = /[a-zA-Z]/
-                                const key = String.fromCharCode(e.keyCode)
-                            
-                                if(!onlyNumbers.test(key)){
-                                    e.preventDefault()
-                                    return
-                                }
-                            }}
+                            required
+                            value={movieId}
+                            onChange={handleChange}
+                            >
                         </input>
                         <label for="movieId">Digite o Filme</label>
                     </div>
                     <div class='form-floating'>
-                        <input type="text" id="anoId" class="form-control shadow-none" required placeholder="Ano de Lançamento" minlength="1" maxlength="8"></input>
+                        <input 
+                            type="text" 
+                            id="anoId" 
+                            class="form-control shadow-none" 
+                            required 
+                            placeholder="Ano de Lançamento" 
+                            minlength="1" 
+                            maxlength="6"
+                            value={anoId}
+                            onChange={handleChangeYear}
+                        >
+                        </input>
                         <label for="anoId">Digite o Ano</label>
                     </div>
                 </form>
-                <button className={styles.buttonSearch}>Buscar</button>
+                <button onClick={funcTest} className={styles.buttonSearch}>Buscar</button>
             </div>
             <div className={styles.porChave} style={{ display: divChave ? 'block' : 'none' }}>
                 <h3 className='text-center py-2'>Pesquise por uma Chave</h3>
                 <form action='#' className={styles.form}>
                     <div class='form-floating'>
-                        <input type='text' id='chaveId' class="form-control shadow-none" placeholder='Ex: Bagdad' required></input>
+                        <input 
+                        type='text' 
+                        id='chaveId' 
+                        class="form-control shadow-none" 
+                        placeholder='Ex: Bagdad' 
+                        required
+                        value={chaveId}
+                        onChange={handleChangeChave}
+                        ></input>
                         <label for="chaveId">Digite uma Chave</label>
                     </div>
                 </form>

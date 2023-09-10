@@ -1,6 +1,7 @@
 import React, {useRef, useState} from 'react'
 import styles from '../styles/movie.module.css'
 
+
 /*
 export async function getServerSideProps(context){
 
@@ -17,7 +18,6 @@ export async function getServerSideProps(context){
 export default function Movies({data}){
 
     const [divFilme, setIsVisible1] = useState(false);
-
     const toggDivFilme = () => {
         if(divChave){
             setIsVisible2(!divChave);
@@ -26,7 +26,6 @@ export default function Movies({data}){
     }
 
     const [divChave, setIsVisible2] = useState(false);
-
     const toggleDivChave = () => {
         if(divFilme){
             setIsVisible1(!divFilme);
@@ -35,31 +34,24 @@ export default function Movies({data}){
     }
 
     const [movieId, setMovie] = useState('')
-
     const handleChange = (e) => {
         const inputText = e.target.value
-    
-        // Use uma expressão regular para validar se o texto contém apenas letras.
         if (/^[a-zA-Z ]+$/.test(inputText) || inputText === '') {
           setMovie(inputText)
         }
     }
 
     const [anoId, setAno] = useState('')
-
     const handleChangeYear = (e) => {
         const inputText = e.target.value
-
         if (/^[0-9]+$/.test(inputText) || inputText === '') {
             setAno(inputText)
         }
     }
 
     const [chaveId, setChave] = useState('')
-
     const handleChangeChave = (e) => {
         const inputText = e.target.value
-
         if (/^[a-zA-Z ]+$/.test(inputText) || inputText === '') {
             setChave(inputText)
         }
@@ -67,38 +59,45 @@ export default function Movies({data}){
 
     const [moviesData, setMovies] = useState(data)
 
-    const loadMovies = async ({nameMovie, yearMovie, typeSearch}) => {
-        console.log('entrou no load')
-        console.log(`tipo: ${typeSearch}`)
+    const loadMovies = async (props) => {
+
+        const {nameMovie, yearMovie, typeSearch} = props
         
         if(typeSearch == 'byMovie'){
+            setMovies(undefined)
             const res = await fetch(`https://www.omdbapi.com/?apikey=cc202b3f&t=${nameMovie}&y=${yearMovie}`)
             const resJson = await res.json()
-            setMovies(resJson)
+            const array = []
+            array.push(resJson)
+            setMovies(array)
         }
         else{
-            console.log(`aqui: ${nameMovie}`)
+            setMovies(undefined)
             const res = await fetch(`https://www.omdbapi.com/?apikey=cc202b3f&s=${nameMovie}`)
             const resJson = await res.json()
-            console.log(resJson)
             setMovies(resJson)
         }
     }
 
+    const [tipoBusca, setType] = useState('')
+
     const searchMovie = () => {
-        console.log('entrou no Movie')
-        //console.log(`title antes: ${movieId}`)
+        setIsVisible1(false);
+        setMovie('')
+        setAno('')
+ 
         const titleFormat = movieId.replace(/ /g, '+')
-        console.log(`title depois: ${titleFormat}`)
-        loadMovies(titleFormat, anoId, 'byMovie')
+        setType('byMovie')
+        loadMovies({nameMovie: titleFormat, yearMovie: anoId, typeSearch: 'byMovie'})
     }
 
     const searchChave = () => {
-        console.log('entrou no Chave')
-        //console.log(`title antes: ${movieId}`)
+        setIsVisible2(false);
+        setChave('')
+
         const titleFormat = chaveId.replace(/ /g, '+')
-        console.log(`title depois: ${titleFormat}`)
-        loadMovies(titleFormat, 0, 'byChave')
+        setType('byChave')
+        loadMovies({nameMovie: titleFormat, yearMovie: 0, typeSearch: 'byChave'})
     }
 
     return (
@@ -162,11 +161,64 @@ export default function Movies({data}){
                 </form>
                 <button onClick={searchChave} className={styles.buttonSearch}>Buscar</button>
             </div>
-            <div>
-                {moviesData?.Search.map((m) => (
-                    <div key={m.imdbID}>{m.Title} --- {m.Year}</div>
-                ))}               
-            </div>
+            <div value={tipoBusca}>
+                {
+                    tipoBusca == 'byMovie' 
+                    ? 
+                        <div className={styles.containerRes}>
+                            <h1 className='text-center py-2'>Resultados</h1>
+                            <CardMovie datas={moviesData} typeBusca={tipoBusca}/>
+                        </div>
+                    : 
+
+                    tipoBusca == 'byChave' 
+                    ?
+                        <div className={styles.containerRes}>
+                            <h1 className='text-center py-2'>Resultados</h1>
+                            <CardMovie datas={moviesData} typeBusca={tipoBusca}/>
+                        </div>
+                    :
+                    null
+                }
+            </div> 
         </>
+    )  
+}
+
+function CardMovie(props){
+
+    const {datas, typeBusca} = props
+
+    return (
+        typeBusca == 'byMovie' ?
+        <div className={styles.containerCard}>{datas?.map((m) => (
+            <div className={styles.card}>
+                <div className={styles.poster}>
+                    <img src={m.Poster}/>
+                </div>
+                <DetailsMovie name={m.Title} year={m.Year}/>
+            </div>
+        ))}</div>
+        :
+        <div className={styles.containerCard}>{datas?.Search.map((m) => (
+            <div className={styles.card}>
+                <div className={styles.poster}>
+                    <img src={m.Poster}/>
+                </div>
+                <DetailsMovie name={m.Title} year={m.Year}/>
+            </div>
+        ))}</div>
+    )
+}
+
+function DetailsMovie(props){
+    const {name, year} = props;
+
+    return (
+        <div className={styles.details}>
+            <h3 className={styles.h3}>{name}</h3>
+            <p className={styles.p}>{year}</p>
+        </div>
+        
     )
 }

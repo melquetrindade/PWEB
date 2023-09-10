@@ -1,6 +1,7 @@
 import React, {useRef, useState} from 'react'
 import styles from '../styles/movie.module.css'
 
+/*
 export async function getServerSideProps(context){
 
     const res = await fetch(`http://www.omdbapi.com/?apikey=cc202b3f&s=bagdad`)
@@ -11,6 +12,7 @@ export async function getServerSideProps(context){
     }
 
 }
+*/
 
 export default function Movies({data}){
 
@@ -63,8 +65,40 @@ export default function Movies({data}){
         }
     }
 
-    const funcTest = () => {
-        console.log(movieId)
+    const [moviesData, setMovies] = useState(data)
+
+    const loadMovies = async ({nameMovie, yearMovie, typeSearch}) => {
+        console.log('entrou no load')
+        console.log(`tipo: ${typeSearch}`)
+        
+        if(typeSearch == 'byMovie'){
+            const res = await fetch(`https://www.omdbapi.com/?apikey=cc202b3f&t=${nameMovie}&y=${yearMovie}`)
+            const resJson = await res.json()
+            setMovies(resJson)
+        }
+        else{
+            console.log(`aqui: ${nameMovie}`)
+            const res = await fetch(`https://www.omdbapi.com/?apikey=cc202b3f&s=${nameMovie}`)
+            const resJson = await res.json()
+            console.log(resJson)
+            setMovies(resJson)
+        }
+    }
+
+    const searchMovie = () => {
+        console.log('entrou no Movie')
+        //console.log(`title antes: ${movieId}`)
+        const titleFormat = movieId.replace(/ /g, '+')
+        console.log(`title depois: ${titleFormat}`)
+        loadMovies(titleFormat, anoId, 'byMovie')
+    }
+
+    const searchChave = () => {
+        console.log('entrou no Chave')
+        //console.log(`title antes: ${movieId}`)
+        const titleFormat = chaveId.replace(/ /g, '+')
+        console.log(`title depois: ${titleFormat}`)
+        loadMovies(titleFormat, 0, 'byChave')
     }
 
     return (
@@ -108,7 +142,7 @@ export default function Movies({data}){
                         <label for="anoId">Digite o Ano</label>
                     </div>
                 </form>
-                <button onClick={funcTest} className={styles.buttonSearch}>Buscar</button>
+                <button onClick={searchMovie} className={styles.buttonSearch}>Buscar</button>
             </div>
             <div className={styles.porChave} style={{ display: divChave ? 'block' : 'none' }}>
                 <h3 className='text-center py-2'>Pesquise por uma Chave</h3>
@@ -126,11 +160,11 @@ export default function Movies({data}){
                         <label for="chaveId">Digite uma Chave</label>
                     </div>
                 </form>
-                <button className={styles.buttonSearch}>Buscar</button>
+                <button onClick={searchChave} className={styles.buttonSearch}>Buscar</button>
             </div>
             <div>
-                {data.Search.map((m) => (
-                    <div>{m.Title} --- {m.Year}</div>
+                {moviesData?.Search.map((m) => (
+                    <div key={m.imdbID}>{m.Title} --- {m.Year}</div>
                 ))}               
             </div>
         </>

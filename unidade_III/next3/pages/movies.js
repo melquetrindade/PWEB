@@ -19,6 +19,7 @@ export default function Movies({data}){
 
     const [divFilme, setIsVisible1] = useState(false);
     const toggDivFilme = () => {
+        setType('')
         if(divChave){
             setIsVisible2(!divChave);
         }
@@ -27,6 +28,7 @@ export default function Movies({data}){
 
     const [divChave, setIsVisible2] = useState(false);
     const toggleDivChave = () => {
+        setType('')
         if(divFilme){
             setIsVisible1(!divFilme);
         }
@@ -36,7 +38,7 @@ export default function Movies({data}){
     const [movieId, setMovie] = useState('')
     const handleChange = (e) => {
         const inputText = e.target.value
-        if (/^[a-zA-Z ]+$/.test(inputText) || inputText === '') {
+        if (/^[a-zA-Z 0-9 ']+$/.test(inputText) || inputText === '') {
           setMovie(inputText)
         }
     }
@@ -52,30 +54,45 @@ export default function Movies({data}){
     const [chaveId, setChave] = useState('')
     const handleChangeChave = (e) => {
         const inputText = e.target.value
-        if (/^[a-zA-Z ]+$/.test(inputText) || inputText === '') {
+        if (/^[a-zA-Z 0-9 ']+$/.test(inputText) || inputText === '') {
             setChave(inputText)
         }
     }
 
     const [moviesData, setMovies] = useState(data)
+    const [isLoad, setLoad] = useState(false)
 
     const loadMovies = async (props) => {
 
         const {nameMovie, yearMovie, typeSearch} = props
+
+        setLoad(true)
         
         if(typeSearch == 'byMovie'){
             setMovies(undefined)
             const res = await fetch(`https://www.omdbapi.com/?apikey=cc202b3f&t=${nameMovie}&y=${yearMovie}`)
             const resJson = await res.json()
-            const array = []
-            array.push(resJson)
-            setMovies(array)
+            setLoad(false)
+            if(resJson.Response == 'False'){
+                setType('erro')
+            }
+            else{
+                const array = []
+                array.push(resJson)
+                setMovies(array)
+            }
         }
         else{
             setMovies(undefined)
             const res = await fetch(`https://www.omdbapi.com/?apikey=cc202b3f&s=${nameMovie}`)
             const resJson = await res.json()
-            setMovies(resJson)
+            setLoad(false)
+            if(resJson.Response == 'False'){
+                setType('erro')
+            }
+            else{
+                setMovies(resJson)
+            }   
         }
     }
 
@@ -161,9 +178,18 @@ export default function Movies({data}){
                 </form>
                 <button onClick={searchChave} className={styles.buttonSearch}>Buscar</button>
             </div>
+            <div value={isLoad}>
+                {
+                    isLoad ? <Load/> : null
+                }
+            </div>
             <div value={tipoBusca}>
                 {
-                    tipoBusca == 'byMovie' 
+                    tipoBusca == 'erro'
+                    ?
+                        <h1 className='text-center py-2'>Nenhum Resultados Encontrado</h1>
+                    :
+                    tipoBusca == 'byMovie'
                     ? 
                         <div className={styles.containerRes}>
                             <h1 className='text-center py-2'>Resultados</h1>
@@ -171,7 +197,7 @@ export default function Movies({data}){
                         </div>
                     : 
 
-                    tipoBusca == 'byChave' 
+                    tipoBusca == 'byChave'
                     ?
                         <div className={styles.containerRes}>
                             <h1 className='text-center py-2'>Resultados</h1>
@@ -209,6 +235,17 @@ function CardMovie(props){
             </div>
         ))}</div>
     )
+}
+
+function Load(){
+    return(
+        <div className={styles.fade}>
+            <div class="spinner-border text-info" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    )
+    
 }
 
 function DetailsMovie(props){

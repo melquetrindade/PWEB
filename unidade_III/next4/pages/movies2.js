@@ -1,43 +1,13 @@
 import React, {useRef, useState} from 'react'
 import styles from '../styles/movie.module.css'
-
-
-/*
-export async function getServerSideProps(context){
-
-    const res = await fetch(`http://www.omdbapi.com/?apikey=cc202b3f&s=bagdad`)
-    const data = await res.json()
-  
-    return {
-        props: {data}
-    }
-
-}
-*/
-
-async function fetcher(url) {
-
-    const res = await fetch(url)
-    const json = await res.json()
-    return json
-
-}
+import { useRouter } from 'next/router';
 
 export default function Movies2(){
 
-    //const {data, error} = useSWR(`http://www.omdbapi.com/?apikey=ME_SUBSTITUA&s=bagdad`, fetcher)    
-
-    /*
-    if (error) {
-        return <div>falha na requisição...</div>
-    }
-    if (!data) {
-        return <div>carregando...</div>
-    }*/
+    const router = useRouter();
 
     const [divFilme, setIsVisible1] = useState(false);
     const toggDivFilme = () => {
-        setType('')
         if(divChave){
             setIsVisible2(!divChave);
         }
@@ -46,7 +16,6 @@ export default function Movies2(){
 
     const [divChave, setIsVisible2] = useState(false);
     const toggleDivChave = () => {
-        setType('')
         if(divFilme){
             setIsVisible1(!divFilme);
         }
@@ -77,48 +46,10 @@ export default function Movies2(){
         }
     }
 
-    const [moviesData, setMovies] = useState(data)
-    const [isLoad, setLoad] = useState(false)
+    //const [moviesData, setMovies] = useState(undefined)
+    //const [isLoad, setLoad] = useState(false)
 
-    const loadMovies = async (props) => {
-
-        const {nameMovie, yearMovie, typeSearch} = props
-        
-        if(typeSearch == 'byMovie'){
-            setMovies(undefined)
-            //const res = await fetch(`https://www.omdbapi.com/?apikey=cc202b3f&t=${nameMovie}&y=${yearMovie}`)
-            //const resJson = await res.json()
-            //setLoad(false)
-
-            const {data, error} = useSWR(`http://www.omdbapi.com/?apikey=ME_SUBSTITUA&s=bagdad`, fetcher)
-
-            if (error) {
-                setType('erro')
-            }
-            else if(!data){
-                setLoad(true)
-            }
-            else{
-                const array = []
-                array.push(resJson)
-                setMovies(array)
-            }
-        }
-        else{
-            setMovies(undefined)
-            const res = await fetch(`https://www.omdbapi.com/?apikey=cc202b3f&s=${nameMovie}`)
-            const resJson = await res.json()
-            setLoad(false)
-            if(resJson.Response == 'False'){
-                setType('erro')
-            }
-            else{
-                setMovies(resJson)
-            }   
-        }
-    }
-
-    const [tipoBusca, setType] = useState('')
+    //const [tipoBusca, setType] = useState('')
 
     const searchMovie = () => {
         setIsVisible1(false);
@@ -126,8 +57,8 @@ export default function Movies2(){
         setAno('')
  
         const titleFormat = movieId.replace(/ /g, '+')
-        setType('byMovie')
-        loadMovies({nameMovie: titleFormat, yearMovie: anoId, typeSearch: 'byMovie'})
+        showMovie({nameMovie: titleFormat, yearMovie: anoId, typeSearch: 'byMovie'})
+        //loadMovies({nameMovie: titleFormat, yearMovie: anoId, typeSearch: 'byMovie'})
     }
 
     const searchChave = () => {
@@ -135,8 +66,18 @@ export default function Movies2(){
         setChave('')
 
         const titleFormat = chaveId.replace(/ /g, '+')
-        setType('byChave')
-        loadMovies({nameMovie: titleFormat, yearMovie: 0, typeSearch: 'byChave'})
+        showMovie({nameMovie: titleFormat, yearMovie: 0, typeSearch: 'byChave'})
+        //loadMovies({nameMovie: titleFormat, yearMovie: 0, typeSearch: 'byChave'})
+    }
+
+    const showMovie = (props) => {
+
+        const {nameMovie, yearMovie, typeSearch} = props
+
+        router.push({
+            pathname: '/movieTest',
+            query: { nameMovie: nameMovie, yearMovie: yearMovie, typeSearch: typeSearch }
+        });
     }
 
     return (
@@ -200,38 +141,38 @@ export default function Movies2(){
                 </form>
                 <button onClick={searchChave} className={styles.buttonSearch}>Buscar</button>
             </div>
-            <div value={isLoad}>
-                {
-                    isLoad ? <Load/> : null
-                }
-            </div>
-            <div value={tipoBusca}>
-                {
-                    tipoBusca == 'erro'
-                    ?
-                        <h1 className='text-center py-2'>Nenhum Resultados Encontrado</h1>
-                    :
-                    tipoBusca == 'byMovie'
-                    ? 
-                        <div className={styles.containerRes}>
-                            <h1 className='text-center py-2'>Resultados</h1>
-                            <CardMovie datas={moviesData} typeBusca={tipoBusca}/>
-                        </div>
-                    : 
-
-                    tipoBusca == 'byChave'
-                    ?
-                        <div className={styles.containerRes}>
-                            <h1 className='text-center py-2'>Resultados</h1>
-                            <CardMovie datas={moviesData} typeBusca={tipoBusca}/>
-                        </div>
-                    :
-                    null
-                }
-            </div> 
         </>
     )  
 }
+
+/*
+
+<div value={tipoBusca}>
+    {
+        tipoBusca == 'erro'
+        ?
+            <h1 className='text-center py-2'>Nenhum Resultados Encontrado</h1>
+        :
+        tipoBusca == 'byMovie'
+        ? 
+            <div className={styles.containerRes}>
+                <h1 className='text-center py-2'>Resultados</h1>
+                <CardMovie datas={moviesData} typeBusca={tipoBusca}/>
+            </div>
+        : 
+
+        tipoBusca == 'byChave'
+        ?
+            <div className={styles.containerRes}>
+                <h1 className='text-center py-2'>Resultados</h1>
+                <CardMovie datas={moviesData} typeBusca={tipoBusca}/>
+            </div>
+        :
+        null
+    }
+</div> 
+
+*/
 
 function CardMovie(props){
 

@@ -58,7 +58,6 @@ export default function Movies2(){
  
         const titleFormat = movieId.replace(/ /g, '+')
         showMovie({nameMovie: titleFormat, yearMovie: anoId, typeSearch: 'byMovie'})
-        //loadMovies({nameMovie: titleFormat, yearMovie: anoId, typeSearch: 'byMovie'})
     }
 
     const searchChave = () => {
@@ -67,7 +66,6 @@ export default function Movies2(){
 
         const titleFormat = chaveId.replace(/ /g, '+')
         showMovie({nameMovie: titleFormat, yearMovie: 0, typeSearch: 'byChave'})
-        //loadMovies({nameMovie: titleFormat, yearMovie: 0, typeSearch: 'byChave'})
     }
 
     const showMovie = (props) => {

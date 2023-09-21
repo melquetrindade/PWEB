@@ -27,11 +27,12 @@
 
 .containerPoster {
     border-radius: 20px;
-    width: 40%;
+    width: 42%;
     height: 100%;
 }
 
 .containerPoster img{
+    width: 100%;
     height: 100%;
     box-shadow: 0px 30px 20px rgb(165, 165, 165);
 }
@@ -52,16 +53,18 @@
 
 .cont01{
     display: block;
-    position: relative;
+    position: absolute;
+    left: 40px;
+    right: 0px;
 }
 
 .cont02{
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 70px;
+    top: 135px;
     left: 0px;
-    right: 330px;
+    right: 300px;
 }
 
 .cont01 p{
@@ -69,20 +72,30 @@
     margin-right: 20px;
 }
 
-.cont01 h1{
+.contTitle{
     position: absolute;
-    color: white;
+    width: 290px;
+    height: 110px;
     top: 20px;
-    left: -350px;
+    left: 40px;
     right: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+
+.contTitle h1{
+    color: white;
+    font-size: 1.8vw;
 }
 
 .card .cont03{
     position: absolute;
     width: 160px;
-    left: 370px;
+    left: 380px;
     right: 0px;
-    top: 50px;
+    top: 40px;
+    overflow-wrap: break-word;
 }
 
 .cont04{

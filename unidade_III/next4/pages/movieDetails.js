@@ -30,7 +30,7 @@ function MovieCard(props){
                 </div>
                 <div className={styles.containerDetails}>
                     <div className={styles.cont01}>
-                        <h1>{movie.Title}</h1>
+                        <div className={styles.contTitle}><h1>{movie.Title}</h1></div>
                         <div className={styles.cont02}>
                             <p>{movie.Year}</p>
                             <p>{movie.Runtime}</p>

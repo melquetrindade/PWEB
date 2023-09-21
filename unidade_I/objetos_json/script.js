@@ -59,40 +59,43 @@ let cabecalioCervs = ["Nome", "Álcool", "Estilo", "Amargor"]
 let colunas = ["name", "alcohol", "style", "ibu"]
 
 const carregarDiv = (cervs, cabCervs) => {
-    const trCervejas = document.getElementById("trCervejas")
-    const bodyCervejas = document.getElementById("bodyCervejas")
 
-    cabCervs.forEach(element => {
-        let th = document.createElement('th')
-        th.setAttribute('scope', 'col')
-        th.innerHTML = `${element}`
-        console.log(th)
-        trCervejas.appendChild(th)
-    });
+    if(document.getElementById("trCervejas").childNodes.length == 1){
 
-    cervs.forEach(element => {
-        let tr = document.createElement('tr')
-        colunas.forEach(dados => {
-            if(element[dados] == undefined){
-                console.log(dados)
-                let td = document.createElement('td')
-                td.innerHTML = `undefined`
-                tr.appendChild(td)
+        const trCervejas = document.getElementById("trCervejas")
+        const bodyCervejas = document.getElementById("bodyCervejas")
 
-            }
-            else{
-                let td = document.createElement('td')
-                td.innerHTML = `${element[dados]}`
-                tr.appendChild(td)
-            }
-            
+        cabCervs.forEach(element => {
+            let th = document.createElement('th')
+            th.setAttribute('scope', 'col')
+            th.innerHTML = `${element}`
+            console.log(th)
+            trCervejas.appendChild(th)
         });
-        bodyCervejas.appendChild(tr)
-    });
 
+        cervs.forEach(element => {
+            let tr = document.createElement('tr')
+            colunas.forEach(dados => {
+                if(element[dados] == undefined){
+                    console.log(dados)
+                    let td = document.createElement('td')
+                    td.innerHTML = `undefined`
+                    tr.appendChild(td)
+
+                }
+                else{
+                    let td = document.createElement('td')
+                    td.innerHTML = `${element[dados]}`
+                    tr.appendChild(td)
+                }
+                
+            });
+            bodyCervejas.appendChild(tr)
+        });
+    }
 }
 
 //let botao = document.getElementById("botaoCarregar")
 //botao.addEventListener("click", () => carregarDiv(cervejas))
 
-document.getElementById("buttonCarregar").addEventListener("click", () => carregarDiv(cervejas, cabecalioCervs))
+document.getElementById("botaoCarregar").addEventListener("click", () => carregarDiv(cervejas, cabecalioCervs))

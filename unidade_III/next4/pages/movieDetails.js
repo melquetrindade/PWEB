@@ -47,6 +47,9 @@ function MovieCard(props){
                             <p style={{marginTop: '-10px'}}>{movie.Genre}</p>
                         </div>
                     </div>
+                    <div className={styles.sinopse}>
+                        <p>{movie.Plot}</p>
+                    </div>
                 </div>
             </div>
         </div>

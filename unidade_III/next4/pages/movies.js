@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react'
 import styles from '../styles/movie.module.css'
-
+import { useRouter } from 'next/router';
 
 /*
 export async function getServerSideProps(context){
@@ -212,6 +212,26 @@ export default function Movies({data}){
     )  
 }
 
+function MovieLink({movie}){
+    const router = useRouter()
+
+    const naveMovie = () => {
+        router.push({
+            pathname: '/movieDetails',
+            query: {id: movie.imdbID}
+        })
+    }
+
+    return(
+        <div onClick={naveMovie} className={styles.card}>
+            <div className={styles.poster}>
+                <img src={movie.Poster}/>
+            </div>
+            <DetailsMovie name={movie.Title} year={movie.Year}/>
+        </div>
+    )
+}
+
 function CardMovie(props){
 
     const {datas, typeBusca} = props
@@ -219,21 +239,11 @@ function CardMovie(props){
     return (
         typeBusca == 'byMovie' ?
         <div className={styles.containerCard}>{datas?.map((m) => (
-            <div className={styles.card}>
-                <div className={styles.poster}>
-                    <img src={m.Poster}/>
-                </div>
-                <DetailsMovie name={m.Title} year={m.Year}/>
-            </div>
+            <MovieLink movie={m}/>
         ))}</div>
         :
         <div className={styles.containerCard}>{datas?.Search.map((m) => (
-            <div className={styles.card}>
-                <div className={styles.poster}>
-                    <img src={m.Poster}/>
-                </div>
-                <DetailsMovie name={m.Title} year={m.Year}/>
-            </div>
+            <MovieLink movie={m}/>
         ))}</div>
     )
 }

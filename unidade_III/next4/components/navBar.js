@@ -18,7 +18,7 @@ export default function NavBar(){
                 <Link href='/movies'>FILMES 1</Link>
             </li>
             <li>
-                <Link href='/movies2'>Filmes 2</Link>
+                <Link href='/movies2'>FILMES 2</Link>
             </li>
         </ul>
     )

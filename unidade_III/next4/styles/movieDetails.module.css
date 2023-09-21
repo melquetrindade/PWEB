@@ -13,11 +13,6 @@
     z-index: 10;
 }
 
-.containerCard{
-    display: block;
-    justify-content: center;
-}
-
 .card{
     display: flex;
     position: relative;
@@ -32,32 +27,71 @@
 
 .containerPoster {
     border-radius: 20px;
-    height: 10px;
     width: 40%;
     height: 100%;
 }
 
 .containerPoster img{
     height: 100%;
+    box-shadow: 0px 30px 20px rgb(165, 165, 165);
 }
 
 .containerDetails{
     position: absolute;
     padding-left: 20px;
-    left: 100px;
+    left: 240px;
     right: 0px;
     bottom: 0;
     width: 90%;
     height: 100%;
-    background: linear-gradient(to left, rgb(42, 42, 42) 30%, rgb(28, 28, 28) 70%, transparent);
+    background: linear-gradient(to left, rgb(42, 42, 42) 30%, rgba(28, 28, 28, 0.904) 87%, transparent);
     overflow: hidden;
     border-radius: 20px;
+    text-align: center;
 }
 
-.card p{
-    color: white;
+.cont01{
+    display: block;
+    position: relative;
 }
 
-.card h1{
+.cont02{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 70px;
+    left: 0px;
+    right: 330px;
+}
+
+.cont01 p{
     color: white;
+    margin-right: 20px;
+}
+
+.cont01 h1{
+    position: absolute;
+    color: white;
+    top: 20px;
+    left: -350px;
+    right: 0px;
+}
+
+.card .cont03{
+    position: absolute;
+    width: 160px;
+    left: 370px;
+    right: 0px;
+    top: 50px;
+}
+
+.cont04{
+    display: block;
+    border-radius: 5px;
+}
+
+.cont04 p{
+    font-size: 12px;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

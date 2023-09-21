@@ -29,10 +29,23 @@ function MovieCard(props){
                     <img src={movie.Poster}></img>
                 </div>
                 <div className={styles.containerDetails}>
-                    <h1>{movie.Title}</h1>
-                    <div>
-                        <p>{movie.Year}</p>
-                        <p>{movie.Runtime}</p>
+                    <div className={styles.cont01}>
+                        <h1>{movie.Title}</h1>
+                        <div className={styles.cont02}>
+                            <p>{movie.Year}</p>
+                            <p>{movie.Runtime}</p>
+                            <p>{movie.Type}</p>
+                        </div>
+                    </div>
+                    <div className={styles.cont03}>
+                        <div className={styles.cont04}>
+                            <p style={{color: 'darkgrey'}}>Elenco:</p>
+                            <p style={{marginTop: '-10px'}}>{movie.Actors}</p>
+                        </div>
+                        <div className={styles.cont04}>
+                            <p style={{color: 'darkgrey'}}>Gêneros:</p>
+                            <p style={{marginTop: '-10px'}}>{movie.Genre}</p>
+                        </div>
                     </div>
                 </div>
             </div>

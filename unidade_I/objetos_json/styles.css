@@ -20,3 +20,33 @@ th{
     padding: 7px;
     color: rgb(255, 255, 255);
 }
+
+div#containermain{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div#container{
+    text-align: center;
+}
+
+div#container > div{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+div#container > div > button{
+    border: none;
+    border: 1px solid black;
+    padding: 7px;
+    border-radius: 10px;
+    background-color: blueviolet;
+    color: white;
+    font-weight: 600;
+}
+
+div#container > div > button:hover{
+    cursor: pointer;
+    background-color: rgb(101, 32, 166);
+}

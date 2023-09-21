@@ -14,7 +14,29 @@ export default function MovieDetails(){
     if(!data) return <Load/>
 
     return(
-        <div>{data.Title}</div>
+        <MovieCard movie={data} />
+    )
+}
+
+function MovieCard(props){
+
+    const {movie} = props
+
+    return(
+        <div className={styles.containerCard}>
+            <div className={styles.card}>
+                <div className={styles.containerPoster}>
+                    <img src={movie.Poster}></img>
+                </div>
+                <div className={styles.containerDetails}>
+                    <h1>{movie.Title}</h1>
+                    <div>
+                        <p>{movie.Year}</p>
+                        <p>{movie.Runtime}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }
 

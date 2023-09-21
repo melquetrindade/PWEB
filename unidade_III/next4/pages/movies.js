@@ -85,6 +85,7 @@ export default function Movies({data}){
         else{
             setMovies(undefined)
             const res = await fetch(`https://www.omdbapi.com/?apikey=cc202b3f&s=${nameMovie}`)
+            //console.log(`aqui: 4: ${res}`)
             const resJson = await res.json()
             setLoad(false)
             if(resJson.Response == 'False'){

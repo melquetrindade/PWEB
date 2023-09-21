@@ -27,11 +27,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/movieDetails.js"
     ],
-    "/movieTest": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/movieTest.js"
-    ],
     "/movies2": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

@@ -12,3 +12,52 @@
     justify-content: center;
     z-index: 10;
 }
+
+.containerCard{
+    display: block;
+    justify-content: center;
+}
+
+.card{
+    display: flex;
+    position: relative;
+    width: 800px;
+    height: 500px;
+    margin-top: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.023);
+    overflow: hidden;
+    
+}
+
+.containerPoster {
+    border-radius: 20px;
+    height: 10px;
+    width: 40%;
+    height: 100%;
+}
+
+.containerPoster img{
+    height: 100%;
+}
+
+.containerDetails{
+    position: absolute;
+    padding-left: 20px;
+    left: 100px;
+    right: 0px;
+    bottom: 0;
+    width: 90%;
+    height: 100%;
+    background: linear-gradient(to left, rgb(42, 42, 42) 30%, rgb(28, 28, 28) 70%, transparent);
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.card p{
+    color: white;
+}
+
+.card h1{
+    color: white;
+}

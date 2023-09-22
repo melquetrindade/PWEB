@@ -8,6 +8,7 @@ export default function Movies2() {
     const router = useRouter();
     const { nameMovie, yearMovie, typeSearch } = router.query;
 
+
     if(typeSearch == 'byMovie'){
         const { data, error } = useSWR(
             `https://www.omdbapi.com/?apikey=cc202b3f&t=${nameMovie}&y=${yearMovie}`,

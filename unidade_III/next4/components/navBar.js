@@ -20,6 +20,9 @@ export default function NavBar(){
             <li>
                 <Link href='/movies2'>FILMES 2</Link>
             </li>
+            <li>
+                <Link href='/infoCliente'>INFO CLIENTE</Link>
+            </li>
         </ul>
     )
 }

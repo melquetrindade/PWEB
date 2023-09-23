@@ -110,7 +110,7 @@ export default function Movies({data}){
             loadMovies({nameMovie: titleFormat, yearMovie: anoId, typeSearch: 'byMovie'})
         }
         else{
-            alert('ERRO, Preencha os campos de pesquisa')
+            alert('ERRO, Preencha os campos de pesquisa!')
         }
     }
 

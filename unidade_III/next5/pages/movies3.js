@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import useSWR from 'swr'
 import styles from '../styles/movies3.module.css'
-import { Button } from 'antd';
+import { Button, Card } from 'antd';
 
 async function theFetcher(url) {
 
@@ -14,15 +14,47 @@ async function theFetcher(url) {
     return json;
 }
 
-export function TheMovies({data,show}){
+export function TheMovies({data, show, func}){
+
+    //console.log(`data.error: ${data.error}`)
+    //console.log(`data.Search: ${data.Search}`)
 
     if (!show) return (<div></div>)    
     if (data.error) return (<div>falha na requisição</div>)
-    if (data.Search === '' ) return (<div>carregando...</div>)
+    if (data.Search === '' ) return (<Load/>)
+
+    const styleCard = {
+        marginTop: 10,
+        width: 300,
+        height: 110,
+        cursor: 'pointer'
+    }
 
     return (
         <div>
-            { data?.Search.map( (m) => <div>{m.Title} --- {m.Year}</div> )}            
+            <h1 className='text-center py-2'>Resultados da API</h1>
+            <div className={styles.containerCard}>
+                { data?.Search.map( (m) => 
+                    <Card 
+                        title={m.Title}
+                        bordered={true}
+                        style={styleCard}
+                        onClick={func}
+                    >
+                        <p>Ano: {m.Year}</p>
+                    </Card>
+                )}  
+            </div>
+        </div>
+    )
+}
+
+function Load(){
+    return(
+        <div className={styles.fade}>
+            <div class="spinner-border text-info" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
         </div>
     )
 }
@@ -31,7 +63,7 @@ export function TheLink({url, handler}){
 
     return (
         <div>
-            <a className={styles.link} href="/movies3.js" onClick={handler}> {url === '' ? 'Mostrar' : 'Ocultar'} </a>
+            <Button type='primary' onClick={handler}>{url === '' ? 'Mostrar' : 'Ocultar'}</Button>
         </div>
     )
 }
@@ -47,11 +79,17 @@ export default function Movies3(){
         else setUrl('')
     }
 
+    //console.log(`data: ${data}`)
+    //console.log(`error: ${error}`)
+
+    const buttonTest = () => {
+        console.log(`funcionou`)
+    }
+
     return (
-        <div>
-            <Button type="primary">Button</Button>
+        <div className={styles.containerMain}>
             <TheLink url={url} handler={onClickHandler}/>
-            <TheMovies data={ error?{error:'Erro na pesquisa'}: data ? data: {Search:''} } show={url !== ''}/>
+            <TheMovies data={ error?{error:'Erro na pesquisa'}: data ? data: {Search:''} } show={url !== ''} func={buttonTest}/>
         </div>
     )
 }

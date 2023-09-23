@@ -266,7 +266,6 @@ function Load(){
             </div>
         </div>
     )
-    
 }
 
 function DetailsMovie(props){

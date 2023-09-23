@@ -8,6 +8,7 @@ export default function Movies2() {
     const router = useRouter();
     const { nameMovie, yearMovie, typeSearch } = router.query;
 
+    //console.log(router.query.nameMovie)
 
     if(typeSearch == 'byMovie'){
         const { data, error } = useSWR(

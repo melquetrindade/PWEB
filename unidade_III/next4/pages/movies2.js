@@ -52,20 +52,30 @@ export default function Movies2(){
     //const [tipoBusca, setType] = useState('')
 
     const searchMovie = () => {
-        setIsVisible1(false);
-        setMovie('')
-        setAno('')
- 
-        const titleFormat = movieId.replace(/ /g, '+')
-        showMovie({nameMovie: titleFormat, yearMovie: anoId, typeSearch: 'byMovie'})
+        if(movieId.length != 0 && anoId.length != 0){
+            setIsVisible1(false);
+            setMovie('')
+            setAno('')
+    
+            const titleFormat = movieId.replace(/ /g, '+')
+            showMovie({nameMovie: titleFormat, yearMovie: anoId, typeSearch: 'byMovie'})
+        }
+        else{
+            alert('ERRO, Preencha os campos de pesquisa!')
+        }
     }
 
     const searchChave = () => {
-        setIsVisible2(false);
-        setChave('')
+        if(chaveId.length != 0){
+            setIsVisible2(false);
+            setChave('')
 
-        const titleFormat = chaveId.replace(/ /g, '+')
-        showMovie({nameMovie: titleFormat, yearMovie: 0, typeSearch: 'byChave'})
+            const titleFormat = chaveId.replace(/ /g, '+')
+            showMovie({nameMovie: titleFormat, yearMovie: 0, typeSearch: 'byChave'})
+        }
+        else{
+            alert('ERRO, Preencha o campo de pesquisa!')
+        }
     }
 
     const showMovie = (props) => {

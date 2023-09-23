@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import useSWR from 'swr'
+import styles from '../styles/movies3.module.css'
+import { Button } from 'antd';
 
 async function theFetcher(url) {
 
@@ -29,7 +31,7 @@ export function TheLink({url, handler}){
 
     return (
         <div>
-            <a href="/movies3.js" onClick={handler}> {url === '' ? 'Mostrar' : 'Ocultar'} </a>
+            <a className={styles.link} href="/movies3.js" onClick={handler}> {url === '' ? 'Mostrar' : 'Ocultar'} </a>
         </div>
     )
 }
@@ -47,6 +49,7 @@ export default function Movies3(){
 
     return (
         <div>
+            <Button type="primary">Button</Button>
             <TheLink url={url} handler={onClickHandler}/>
             <TheMovies data={ error?{error:'Erro na pesquisa'}: data ? data: {Search:''} } show={url !== ''}/>
         </div>

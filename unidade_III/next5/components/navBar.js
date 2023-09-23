@@ -21,6 +21,9 @@ export default function NavBar(){
                 <Link href='/movies2'>FILMES 2</Link>
             </li>
             <li>
+                <Link href='/movies3'>FILMES 3</Link>
+            </li>
+            <li>
                 <Link href='/infoCliente'>INFO CLIENTE</Link>
             </li>
         </ul>

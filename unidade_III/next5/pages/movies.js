@@ -276,6 +276,5 @@ function DetailsMovie(props){
             <h3 className={styles.h3}>{name}</h3>
             <p className={styles.p}>{year}</p>
         </div>
-        
     )
 }

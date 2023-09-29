@@ -25,21 +25,39 @@ export function TheForm(){
 
 export function TheMovies({data,show}){
 
+    const [isOrdemCres, setOrdem] = useState(false)
+
+    const ordenar = () => {
+        console.log('entrou')
+        if(isOrdemCres == true){
+            setOrdem(false)
+        }
+        else{
+            setOrdem(true)
+        }
+    }
+
     if (!show) return (<div></div>)
     if (!data) return (<div></div>)
-    if (data.error) return (<div>falha na pesquisa</div>)
-    if (data.Search === '' ) return (<div>carregando...</div>)
+    if (data.error) return ( <p className='text-center py-2 display-6'>Nenhum Resultados Encontrado</p> )
+    if (data.Search === '' ) return ( <Load/> )
 
     return (
         <div>
             {
                 data.Search == undefined
                 ?
-                    <div>Nenhum Resultado Encontrado</div>
+                    <p className='text-center py-2 display-6'>Nenhum Resultados Encontrado</p>
                 :
                     <div>
-                        { data?.Search.map( (m) => <div key={m.imdbID}>{m.Title} --- {m.Year}</div>  ) }
-                    </div> 
+                        <div className={styles.containerMovie}>
+                            { data?.Search.map( (m) => <div key={m.imdbID}>{m.Title} --- {m.Year}</div>  ) }
+                        </div>
+                        <div className={styles.containerButton}>
+                            <span class="material-symbols-outlined">arrow_downward</span>
+                            <button onClick={ordenar}>{isOrdemCres ? 'Ordenar Decrescente' : 'Ordenar Crescente'}</button>
+                        </div> 
+                    </div>
             }           
         </div>
     )
@@ -121,6 +139,16 @@ function FormMensage({props}){
             {
                 props ? <h1 className='text-center py-2'>Preencha o Campo de Pesquisa</h1> : null
             }
+        </div>
+    )
+}
+
+function Load(){
+    return(
+        <div className={styles.fade}>
+            <div class="spinner-border text-info" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
         </div>
     )
 }

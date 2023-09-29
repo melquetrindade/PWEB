@@ -1,37 +1,41 @@
 import useSWR from 'swr'
 import React, {useState} from 'react'
+import Link from 'next/link'
+import styles from '../styles/movies4.module.css'
 
 export function TheForm(){
     return (
         <div>
             <form>
-                <label htmlFor="titleSearchString">Filtro de Título</label>
-                <input id="titleSearchString" name="titleSearchString" type="text" autoComplete="true"/>
+                <div class='form-floating'>
+                    <input 
+                        type='text' 
+                        id='titleSearchString'
+                        name='titleSearchString'
+                        class="form-control shadow-none" 
+                        placeholder='Ex: Batman' 
+                        autoComplete='true'
+                    ></input>
+                    <label for="titleSearchString">Filtro de Título</label>
+                </div>
             </form>
         </div>
     )
 }
 
-export function TheMovies({data,show, search}){
+export function TheMovies({data,show}){
 
     if (!show) return (<div></div>)
     if (!data) return (<div></div>)
     if (data.error) return (<div>falha na pesquisa</div>)
     if (data.Search === '' ) return (<div>carregando...</div>)
-    if(search){
-        console.log('tem nada')
-    }
 
     return (
         <div>
             {
-                !search
-                ?
-                    <div>Preencha o campo de pesquisa</div>
-                :
                 data.Search == undefined
                 ?
-                    <div>Nenhum Resultado Encontrado{`oi ${search}`}</div>
+                    <div>Nenhum Resultado Encontrado</div>
                 :
                     <div>
                         { data?.Search.map( (m) => <div key={m.imdbID}>{m.Title} --- {m.Year}</div>  ) }
@@ -41,10 +45,12 @@ export function TheMovies({data,show, search}){
     )
 }
 
+
+
 export function TheLink({url, handler}){
     return (
-        <div>
-            <a href="/movies3.js" onClick={handler}> {url === '' ? 'Mostrar' : 'Ocultar'} </a>
+        <div className={styles.containerButton}>
+            <a href="#" onClick={handler}> {url === '' ? 'Mostrar' : 'Ocultar'} </a>
         </div>
     )
 }
@@ -62,30 +68,59 @@ export default function Movies33(){
         return json;
     })
 
-    const [search1, setSearch] = useState(false)
+    const [hasForm, setHasForm] = useState(false)
 
     const onClickHandler = e => {
         e.preventDefault()
         let s = document.getElementById('titleSearchString').value
-        //setSearch(s)
-        console.log(`pesquisa: ${s}`)
         if(s){
+            if(hasForm == true){
+                setHasForm(false)
+            }
             if (state.url === '') {
                 setState({url:'http://www.omdbapi.com',titleSearchString:s})
             }
             else setState({url:'',titleSearchString: state.titleSearchString})
         }
         else{
-            console.log('entrou')
-            setSearch(true)
+            setState({url:'',titleSearchString: state.titleSearchString})
+            setHasForm(true)
         }
     }
 
     return (
         <div>
+            <OptionSearch/>
             <TheForm/>
             <TheLink url={state.url} handler={onClickHandler} />
-            <TheMovies data={data ? data: {Search:''} } show={state.url !== ''} search={search1}/>
+            <TheMovies data={data ? data: {Search:''} } show={state.url !== ''}/>
+            <FormMensage props={hasForm}/>
+        </div>
+    )
+}
+
+function OptionSearch(){
+    return(
+        <div className={styles.containerOp}>
+            <p>Modos de Pesquisas:</p>
+            <ul>
+                <li>
+                    <Link href='/'>Pesquisa após o Enter</Link>
+                </li>
+                <li>
+                    <Link href='/movies'>Pesquisa por Busca Específica</Link>
+                </li>
+            </ul>
+        </div>
+    )
+}
+
+function FormMensage({props}){
+    return(
+        <div>
+            {
+                props ? <h1 className='text-center py-2'>Preencha o Campo de Pesquisa</h1> : null
+            }
         </div>
     )
 }

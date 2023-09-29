@@ -23,8 +23,9 @@ export function TheForm(){
     )
 }
 
-export function TheMovies({data,show}){
+export function TheMovies({data,show, ordenacao, func}){
 
+    /*
     const [isOrdemCres, setOrdem] = useState(false)
 
     const ordenar = () => {
@@ -35,7 +36,7 @@ export function TheMovies({data,show}){
         else{
             setOrdem(true)
         }
-    }
+    }*/
 
     if (!show) return (<div></div>)
     if (!data) return (<div></div>)
@@ -54,8 +55,19 @@ export function TheMovies({data,show}){
                             { data?.Search.map( (m) => <div key={m.imdbID}>{m.Title} --- {m.Year}</div>  ) }
                         </div>
                         <div className={styles.containerButton}>
-                            <span class="material-symbols-outlined">arrow_downward</span>
-                            <button onClick={ordenar}>{isOrdemCres ? 'Ordenar Decrescente' : 'Ordenar Crescente'}</button>
+                            {
+                                ordenacao 
+                                ? 
+                                    <div onClick={func}>
+                                        <span class="material-symbols-outlined">arrow_downward</span>
+                                        Ordenar Decrescente
+                                    </div>
+                                :
+                                    <div onClick={func}>
+                                        <span class="material-symbols-outlined">arrow_upward</span>
+                                        Ordenar Crescente
+                                    </div>
+                            }
                         </div> 
                     </div>
             }           
@@ -87,6 +99,7 @@ export default function Movies33(){
     })
 
     const [hasForm, setHasForm] = useState(false)
+    //const [moviesJson, setMoviesJson] = useState(data)
 
     const onClickHandler = e => {
         e.preventDefault()
@@ -106,12 +119,37 @@ export default function Movies33(){
         }
     }
 
+    const [isOrdemCres, setOrdem] = useState(false)
+
+    const ordenar = () => {
+        console.log('entrou')
+        if(isOrdemCres == true){
+            const moviesOrdenados = data.Search.sort(function(movie1, movie2){
+                let x = movie1.Title.toUpperCase()
+                let y = movie2.Title.toUpperCase()
+                return x == y ? 0 : x > y ? -1 : 1
+            })
+            console.log(moviesOrdenados)
+            setOrdem(false)
+        }
+        else{
+            const moviesOrdenados = data.Search.sort(function(movie1, movie2){
+                let x = movie1.Title.toUpperCase()
+                let y = movie2.Title.toUpperCase()
+                return x == y ? 0 : x > y ? 1 : -1
+            })
+            console.log(moviesOrdenados)
+            //setMoviesJson(moviesOrdenados)
+            setOrdem(true)
+        }
+    }
+
     return (
         <div>
             <OptionSearch/>
             <TheForm/>
             <TheLink url={state.url} handler={onClickHandler} />
-            <TheMovies data={data ? data: {Search:''} } show={state.url !== ''}/>
+            <TheMovies data={data ? data: {Search:''} } show={state.url !== ''} ordenacao={isOrdemCres} func={ordenar}/>
             <FormMensage props={hasForm}/>
         </div>
     )

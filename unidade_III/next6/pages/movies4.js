@@ -153,7 +153,7 @@ function OptionSearch(){
             <p>Modos de Pesquisas:</p>
             <ul>
                 <li>
-                    <Link href='/'>Pesquisa após o Enter</Link>
+                    <Link href='/movies4plus'>Pesquisa após o Enter</Link>
                 </li>
                 <li>
                     <Link href='/movies'>Pesquisa por Busca Específica</Link>

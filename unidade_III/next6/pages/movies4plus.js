@@ -48,7 +48,7 @@ export default function SearchEnter(){
             
             if(e.keyCode == 13){
                 e.preventDefault()
-
+                document.getElementById('titleSearchString').blur()
                 let s = document.getElementById('titleSearchString').value
                 if(s){
                     if(hasForm == true){
@@ -60,6 +60,7 @@ export default function SearchEnter(){
                     else setState({url:'',titleSearchString: state.titleSearchString})
                 }
                 else{
+                    console.log('entrou')
                     setState({url:'',titleSearchString: state.titleSearchString})
                     setHasForm(true)
                 }
@@ -69,6 +70,7 @@ export default function SearchEnter(){
 
     return(
         <div>
+            <Cabecalho/>
             <TheForm func1={onFoco} func2={onEnter}/>
             <TheMovies data={data? data : {Search: ''}} show={state.url !== ''}/>
             <FormMensage props={hasForm}/>
@@ -135,6 +137,18 @@ export function TheMovies({data,show}){
                         </div> 
                     </div>
             }           
+        </div>
+    )
+}
+
+export function Cabecalho(){
+    return(
+        <div className={styles.containerOBS}>
+            <h1 className='text-center py-2'>Pesquise por um Filme</h1>
+            <div>
+                <h1>Instruções:</h1>
+                <p>Tecle Enter para fazer a pesquisa</p>
+            </div>
         </div>
     )
 }

@@ -45,3 +45,25 @@
     background-color: rgb(194, 129, 255);
     cursor: pointer;
 }
+
+.containerOBS{
+    margin-bottom: 10px;
+}
+
+.containerOBS > div{
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px;
+    background-color: beige;
+}
+
+.containerOBS > div h1{
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.containerOBS > div p{
+    font-size: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 0px;
+}

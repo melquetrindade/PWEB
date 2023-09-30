@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import Link from 'next/link'
 import styles from '../styles/movies4.module.css'
 
-export function TheForm(){
+export function TheForm({func}){
     return (
         <div>
             <form>
@@ -15,6 +15,7 @@ export function TheForm(){
                         class="form-control shadow-none" 
                         placeholder='Ex: Batman' 
                         autoComplete='true'
+                        onFocus={func}
                     ></input>
                     <label for="titleSearchString">Filtro de Título</label>
                 </div>
@@ -23,20 +24,31 @@ export function TheForm(){
     )
 }
 
-export function TheMovies({data,show, ordenacao, func}){
+export function TheMovies({data,show}){
 
-    /*
     const [isOrdemCres, setOrdem] = useState(false)
 
-    const ordenar = () => {
-        console.log('entrou')
+    const order = () => {
+
         if(isOrdemCres == true){
+            data.Search.sort(function(movie1, movie2){
+                let x = movie1.Title.toUpperCase()
+                let y = movie2.Title.toUpperCase()
+                return x == y ? 0 : x > y ? -1 : 1
+            })
+
             setOrdem(false)
         }
         else{
+            
+            data.Search.sort(function(movie1, movie2){
+                let x = movie1.Title.toUpperCase()
+                let y = movie2.Title.toUpperCase()
+                return x == y ? 0 : x > y ? 1 : -1
+            })
             setOrdem(true)
         }
-    }*/
+    }
 
     if (!show) return (<div></div>)
     if (!data) return (<div></div>)
@@ -56,14 +68,14 @@ export function TheMovies({data,show, ordenacao, func}){
                         </div>
                         <div className={styles.containerButton}>
                             {
-                                ordenacao 
+                                isOrdemCres 
                                 ? 
-                                    <div onClick={func}>
+                                    <div onClick={order}>
                                         <span class="material-symbols-outlined">arrow_downward</span>
                                         Ordenar Decrescente
                                     </div>
                                 :
-                                    <div onClick={func}>
+                                    <div onClick={order}>
                                         <span class="material-symbols-outlined">arrow_upward</span>
                                         Ordenar Crescente
                                     </div>
@@ -98,8 +110,13 @@ export default function Movies33(){
         return json;
     })
 
+    const onFocoForm = () => {
+        console.log('clicou')
+        document.getElementById('titleSearchString').value = ''
+        setState({url: '', titleSearchString: ''})
+    }
+
     const [hasForm, setHasForm] = useState(false)
-    //const [moviesJson, setMoviesJson] = useState(data)
 
     const onClickHandler = e => {
         e.preventDefault()
@@ -119,37 +136,12 @@ export default function Movies33(){
         }
     }
 
-    const [isOrdemCres, setOrdem] = useState(false)
-
-    const ordenar = () => {
-        console.log('entrou')
-        if(isOrdemCres == true){
-            const moviesOrdenados = data.Search.sort(function(movie1, movie2){
-                let x = movie1.Title.toUpperCase()
-                let y = movie2.Title.toUpperCase()
-                return x == y ? 0 : x > y ? -1 : 1
-            })
-            console.log(moviesOrdenados)
-            setOrdem(false)
-        }
-        else{
-            const moviesOrdenados = data.Search.sort(function(movie1, movie2){
-                let x = movie1.Title.toUpperCase()
-                let y = movie2.Title.toUpperCase()
-                return x == y ? 0 : x > y ? 1 : -1
-            })
-            console.log(moviesOrdenados)
-            //setMoviesJson(moviesOrdenados)
-            setOrdem(true)
-        }
-    }
-
     return (
         <div>
             <OptionSearch/>
-            <TheForm/>
+            <TheForm func={onFocoForm} />
             <TheLink url={state.url} handler={onClickHandler} />
-            <TheMovies data={data ? data: {Search:''} } show={state.url !== ''} ordenacao={isOrdemCres} func={ordenar}/>
+            <TheMovies data={data ? data: {Search:''} } show={state.url !== ''}/>
             <FormMensage props={hasForm}/>
         </div>
     )

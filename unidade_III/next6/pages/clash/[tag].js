@@ -36,7 +36,12 @@ export async function getStaticPaths(){
 
 export async function getStaticProps({ params }) {
 
-    const res = await fetch(`https://api.clashroyale.com/v1/players/${params.tag}`)
+    const headers = {
+        "Accept": "application/json",
+        "Authorization": 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjU5ZjM5NzIyLTc4MWYtNDFjMS1iYzhiLWY5MjAyNGIyOTRjZiIsImlhdCI6MTY5NzExOTI2Mywic3ViIjoiZGV2ZWxvcGVyL2M1ODY4YWIzLWNhYjItYjQ3MC0zNGE4LTY2Nzk4NDhmNjllZCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNzcuNzMuMjAyLjMiXSwidHlwZSI6ImNsaWVudCJ9XX0.RkmynGJU0w9IsTsALr16yO2qqjdAO_hNAhywtc7vFNV3_Rm7ksZswjTGUTvUBP1-V2OJlaPtKc6krfDBYYfC8w'
+    }
+
+    const res = await fetch(`https://api.clashroyale.com/v1/players/${params.tag}`, {headers})
     const data = await res.json();
 
     return {

@@ -21,7 +21,10 @@ export default function NavBar(){
                 <Link href='/movies4'>FILMES 4</Link>
             </li>
             <li>
-                <Link href='/movies/tt0033152'>FILMES 5</Link>
+                <Link href='/movies/tt0033152'>FILMES 5.1</Link>
+            </li>
+            <li>
+                <Link href='/clash/%2PRRPYCV0'>FILMES 5.2</Link>
             </li>
             <li>
                 <Link href='/infoCliente'>INFO CLIENTE</Link>

@@ -129,7 +129,7 @@ export default function Movies({data}){
     }
 
     return (
-        <>
+        <div className={styles.body}>
             <div>
                 <h3 className='text-center py-2'>Filtros de Pesquisa</h3>
                 <div className={styles.filtro}>
@@ -218,7 +218,7 @@ export default function Movies({data}){
                     null
                 }
             </div> 
-        </>
+        </div>
     )  
 }
 

@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.body{
+    padding: 20px;
+}
+
 .filtro{
     display: flex;
     justify-content: center;

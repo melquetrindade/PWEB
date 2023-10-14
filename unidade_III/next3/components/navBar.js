@@ -9,13 +9,7 @@ export default function NavBar(){
                 <Link href='/'>HOME</Link>
             </li>
             <li>
-                <Link href='/projects'>PROJETOS</Link>
-            </li>
-            <li>
-                <Link href='/contact'>CONTATO</Link>
-            </li>
-            <li>
-                <Link href='/movies'>FILMES</Link>
+                <Link href='/movies'>RECEITA 3</Link>
             </li>
         </ul>
     )

@@ -2,6 +2,7 @@ import useSWR from 'swr'
 import React, {useState} from 'react'
 import Link from 'next/link'
 import styles from '../styles/movies4.module.css'
+import {notification} from 'antd'
 
 export function TheForm({func}){
     return (
@@ -116,15 +117,20 @@ export default function Movies33(){
         setState({url: '', titleSearchString: ''})
     }
 
-    const [hasForm, setHasForm] = useState(false)
+    const [api, contextHolder] = notification.useNotification();
+    const openNotification = ({placement, title}) => {
+        api.info({
+        message: `${title}`,
+        description:
+            'Este é um campo obrigatório. Informe algum filme ou série!',
+        placement,
+        });
+    }
 
     const onClickHandler = e => {
         e.preventDefault()
         let s = document.getElementById('titleSearchString').value
         if(s){
-            if(hasForm == true){
-                setHasForm(false)
-            }
             if (state.url === '') {
                 setState({url:'http://www.omdbapi.com',titleSearchString:s})
             }
@@ -132,17 +138,17 @@ export default function Movies33(){
         }
         else{
             setState({url:'',titleSearchString: state.titleSearchString})
-            setHasForm(true)
+            openNotification({placement: 'topRight', title: 'CAMPO EM BRANCO!'})
         }
     }
 
     return (
         <div className={styles.body}>
+            {contextHolder}
             <OptionSearch/>
             <TheForm func={onFocoForm} />
             <TheLink url={state.url} handler={onClickHandler} />
             <TheMovies data={data ? data: {Search:''} } show={state.url !== ''}/>
-            <FormMensage props={hasForm}/>
         </div>
     )
 }
@@ -159,16 +165,6 @@ function OptionSearch(){
                     <Link href='/movies'>Pesquisa por Busca Específica</Link>
                 </li>
             </ul>
-        </div>
-    )
-}
-
-function FormMensage({props}){
-    return(
-        <div>
-            {
-                props ? <h1 className='text-center py-2'>Preencha o Campo de Pesquisa</h1> : null
-            }
         </div>
     )
 }

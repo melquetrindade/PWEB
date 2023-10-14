@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.body{
+    padding: 20px;
+}
+
 .containerCard{
     display: flex;
     justify-content: center;

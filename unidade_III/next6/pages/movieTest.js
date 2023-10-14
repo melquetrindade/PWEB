@@ -23,7 +23,7 @@ export default function Movies2() {
         if (!data) return <Load/>
         if(array.length != undefined){
             return (
-                <div>
+                <div className={styles.body}>
                     <h1 className='text-center py-2'>Resultados</h1>
                     <CardMovie datas={array} typeBusca={typeSearch}/>
                 </div>
@@ -41,7 +41,7 @@ export default function Movies2() {
         if (!data) return <Load/>
         if(data?.Search != undefined){
             return (
-                <div>
+                <div className={styles.body}>
                     <h1 className='text-center py-2'>Resultados</h1>
                     <CardMovie datas={data} typeBusca={typeSearch}/>
                 </div>

@@ -137,7 +137,7 @@ export default function Movies33(){
     }
 
     return (
-        <div>
+        <div className={styles.body}>
             <OptionSearch/>
             <TheForm func={onFocoForm} />
             <TheLink url={state.url} handler={onClickHandler} />

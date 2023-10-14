@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.body{
+    padding: 20px;
+}
+
 .containerOp{
     display: flex;
     align-items: center;

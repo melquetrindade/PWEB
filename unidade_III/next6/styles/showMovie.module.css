@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.body{
+    padding: 20px;
+}
+
 .containerCard{
     padding: 0px 20px;
     display: grid;

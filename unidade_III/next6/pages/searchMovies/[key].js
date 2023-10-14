@@ -20,7 +20,7 @@ export default function ShowMovies(){
         )
     }
     return(
-        <div>
+        <div className={styles.body}>
             <h1 className='text-center py-2'>Resultados para {key}</h1>
             <div className={styles.containerCard}>
                 {data?.Search.map( (m) => 
@@ -28,7 +28,7 @@ export default function ShowMovies(){
                         <div className={styles.poster}>
                             <img src={m.Poster}/>
                         </div>
-                        <DetailsMovie name={m.Title} year={m.Year}/>
+                        <DetailsMovie name={m.Title} year={m.Year} id={m.imdbID}/>
                     </div>
                 )}
             </div>
@@ -37,10 +37,19 @@ export default function ShowMovies(){
 }
 
 function DetailsMovie(props){
-    const {name, year} = props;
+    const {name, year, id} = props;
+
+    const router = useRouter()
+
+    const pushDetails = () => {
+        router.push({
+            pathname: '../movieDetails',
+            query: {id: id}
+        })
+    }
 
     return (
-        <div className={styles.details}>
+        <div className={styles.details} onClick={pushDetails}>
             <h3 className={styles.h3}>{name}</h3>
             <p className={styles.p}>{year}</p>
         </div>

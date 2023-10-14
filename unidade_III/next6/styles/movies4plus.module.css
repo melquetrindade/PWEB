@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.body{
+    padding: 20px;
+}
+
 .fade{
     position: fixed;
     top: 0;

@@ -69,7 +69,7 @@ export default function SearchEnter(){
     }
 
     return(
-        <div>
+        <div className={styles.body}>
             <Cabecalho/>
             <TheForm func1={onFoco} func2={onEnter}/>
             <TheMovies data={data? data : {Search: ''}} show={state.url !== ''}/>

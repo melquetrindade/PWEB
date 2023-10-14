@@ -3,12 +3,12 @@ import styles from '../styles/index.module.css'
 
 export default function Home(){
     return (
-        <>
+        <div className={styles.body}>
             <h1>
                 Página Principal
             </h1>
             <ShowImg/>
-        </>
+        </div>
     )
 }
 

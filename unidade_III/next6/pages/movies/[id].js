@@ -1,8 +1,10 @@
 import React from 'react'
+import styles from '../../styles/movieDetails.module.css'
 
 export default function TheMovie({data}){
 
-    console.log(`Pré-renderizando ${data.Title}`)
+    //console.log(`Pré-renderizando ${data.Title}`)
+    /*
     return (
         <div>
             <div>{data.Title} --- {data.Year}</div>
@@ -11,6 +13,38 @@ export default function TheMovie({data}){
                 <img src={data.Poster} width="300" height="400"/>
             </div>
         </div>           
+    )*/
+    return(
+        <div className={styles.containerCard}>
+            <div className={styles.card}>
+                <div className={styles.containerPoster}>
+                    <img src={data.Poster}></img>
+                </div>
+                <div className={styles.containerDetails}>
+                    <div className={styles.cont01}>
+                        <div className={styles.contTitle}><h1>{data.Title}</h1></div>
+                        <div className={styles.cont02}>
+                            <p>{data.Year}</p>
+                            <p>{data.Runtime}</p>
+                            <p>{data.Type}</p>
+                        </div>
+                    </div>
+                    <div className={styles.cont03}>
+                        <div className={styles.cont04}>
+                            <p style={{color: 'darkgrey'}}>Elenco:</p>
+                            <p style={{marginTop: '-10px'}}>{data.Actors}</p>
+                        </div>
+                        <div className={styles.cont04}>
+                            <p style={{color: 'darkgrey'}}>Gêneros:</p>
+                            <p style={{marginTop: '-10px'}}>{data.Genre}</p>
+                        </div>
+                    </div>
+                    <div className={styles.sinopse}>
+                        <p>{data.Plot}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }
 

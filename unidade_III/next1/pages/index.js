@@ -1,5 +1,5 @@
 import React from 'react';
-import {Tabela} from './tabela.js';
+import {Tabela} from '../lib/tabela.js';
 import styles from '../estilos/style.module.css'
 
 // Comandos úteis:

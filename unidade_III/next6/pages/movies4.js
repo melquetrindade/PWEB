@@ -132,7 +132,7 @@ export default function Movies33(){
         let s = document.getElementById('titleSearchString').value
         if(s){
             if (state.url === '') {
-                setState({url:'http://www.omdbapi.com',titleSearchString:s})
+                setState({url:'https://www.omdbapi.com',titleSearchString:s})
             }
             else setState({url:'',titleSearchString: state.titleSearchString})
         }

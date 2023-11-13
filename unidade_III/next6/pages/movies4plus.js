@@ -25,7 +25,7 @@ export default function SearchEnter(){
                 setHasForm(false)
             }
             if (state.url === '') {
-                setState({url:'http://www.omdbapi.com',titleSearchString:s})
+                setState({url:'https://www.omdbapi.com',titleSearchString:s})
             }
             else setState({url:'',titleSearchString: state.titleSearchString})
         }
@@ -55,7 +55,7 @@ export default function SearchEnter(){
                         setHasForm(false)
                     }
                     if (state.url === '') {
-                        setState({url:'http://www.omdbapi.com',titleSearchString:s})
+                        setState({url:'https://www.omdbapi.com',titleSearchString:s})
                     }
                     else setState({url:'',titleSearchString: state.titleSearchString})
                 }

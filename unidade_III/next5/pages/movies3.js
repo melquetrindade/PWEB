@@ -97,7 +97,7 @@ export default function Movies3(){
 
         if (url === '') {
             setOp('movieLink')
-            setUrl('http://www.omdbapi.com/?apikey=cc202b3f&&s=bagdad')
+            setUrl('https://www.omdbapi.com/?apikey=cc202b3f&&s=bagdad')
         }
         else {
             setOp('')
